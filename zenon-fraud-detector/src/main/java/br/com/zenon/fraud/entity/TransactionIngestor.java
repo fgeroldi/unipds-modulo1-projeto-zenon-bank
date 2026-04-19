@@ -1,11 +1,12 @@
 package br.com.zenon.fraud.entity;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Optional;
 
 public class TransactionIngestor {
     private String filename;
@@ -16,20 +17,17 @@ public class TransactionIngestor {
     }
 
     public List<Transaction> load() {
-        var transactions = new ArrayList<Transaction>();
-
-        try (var inputStream = new FileInputStream(filename); var scanner = new Scanner(inputStream);) {
-            int lineCounter = 0;
-            while(scanner.hasNextLine() && lineCounter < MAX_LINES+1) {
-                String line = scanner.nextLine();
-                lineCounter++;
-
-                if(lineCounter == 1)
-                    continue;
-
-                var transaction = Transaction.from(line);
-                transactions.add(transaction);
-            }
+        List<Transaction> transactions = new ArrayList<>();
+        var path = Path.of(filename);
+        try {
+            transactions = Files.readAllLines(path)
+                    .stream()
+                    .skip(1)
+                    .limit(MAX_LINES)
+                    .map(Transaction::from)
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .toList();
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Arquivo não encontrado");
         } catch (IOException e) {
