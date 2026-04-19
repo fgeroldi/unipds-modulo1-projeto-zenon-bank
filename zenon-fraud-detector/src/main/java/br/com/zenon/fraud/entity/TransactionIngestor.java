@@ -19,7 +19,7 @@ public class TransactionIngestor {
         List<Transaction> transactions = new ArrayList<>();
         var path = Path.of(filename);
         try {
-            int MAX_LINES = 50000;
+            int MAX_LINES = 100000;
             transactions = Files.readAllLines(path)
                     .stream()
                     .skip(1)
