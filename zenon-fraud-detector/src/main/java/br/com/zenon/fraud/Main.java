@@ -1,15 +1,9 @@
 package br.com.zenon.fraud;
 
-import br.com.zenon.fraud.entity.Customer;
 import br.com.zenon.fraud.entity.Transaction;
 import br.com.zenon.fraud.entity.TransactionIngestor;
-import br.com.zenon.fraud.entity.TransactionType;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-
-import static br.com.zenon.fraud.entity.TransactionType.CASH_OUT;
 
 public class Main {
     static void main() {

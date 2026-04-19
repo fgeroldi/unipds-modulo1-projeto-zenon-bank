@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-import static br.com.zenon.fraud.entity.TransactionType.*;
-
 public record Transaction(
     Integer step,
     TransactionType type,
