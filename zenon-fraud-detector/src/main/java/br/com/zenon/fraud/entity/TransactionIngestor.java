@@ -9,8 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class TransactionIngestor {
-    private String filename;
-    private int MAX_LINES = 1000;
+    private final String filename;
 
     public TransactionIngestor(String filename) {
         this.filename = filename;
@@ -20,6 +19,7 @@ public class TransactionIngestor {
         List<Transaction> transactions = new ArrayList<>();
         var path = Path.of(filename);
         try {
+            int MAX_LINES = 50000;
             transactions = Files.readAllLines(path)
                     .stream()
                     .skip(1)
