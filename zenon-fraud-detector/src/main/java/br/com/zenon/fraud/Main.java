@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Main {
     static void main() {
-        var ingestor = new TransactionIngestor("data/PS_20174392719_1491204439457_log.csv");
+        var ingestor = new TransactionIngestor("data/paysim_with_bad_data.csv");
         List<Transaction> transactions = ingestor.load();
 
         for (int i = 0; i < 10; i++) {
